@@ -25,8 +25,8 @@ def c(ell,m):
         return (factorial(ell-1)*(-2)**Abs(m))/factorial(ell+Abs(m))*sin(Abs(m)*phi)
 
 
-ell=4
-m=1
+ell=6
+m=0
 
 Sigma=c(ell,m)*r**ell*assoc_legendre(ell,Abs(m),cos(theta))
 Sigma=sym.simplify(Sigma)
@@ -49,9 +49,9 @@ Pix=Pix.doit()
 Piy=Piy.doit()
 Piz=Piz.doit()
 
-Pix=sym.simplify(Pix)
-Piy=sym.simplify(Piy)
-Piz=sym.simplify(Piz)
+Pix=sym.simplify(Pix.expand())
+Piy=sym.simplify(Piy.expand())
+Piz=sym.simplify(Piz.expand())
 
 print(ell-1,m)
 print("Pix is %s"%Pix)
