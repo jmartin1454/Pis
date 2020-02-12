@@ -1,5 +1,14 @@
 #!/usr/bin/python
 
+# calculates Sigma and Pi from
+
+# http://inspirehep.net/record/1703751
+
+# using symbolic algebra
+
+# Wed Feb 12 15:14:12 CST 2020 Jeff and Mark
+
+
 from sympy import assoc_legendre
 from sympy import cos,sin,Abs,factorial
 from sympy import sqrt
@@ -25,7 +34,7 @@ def c(ell,m):
         return (factorial(ell-1)*(-2)**Abs(m))/factorial(ell+Abs(m))*sin(Abs(m)*phi)
 
 
-ell=6
+ell=3
 m=0
 
 Sigma=c(ell,m)*r**ell*assoc_legendre(ell,Abs(m),cos(theta))
@@ -38,7 +47,7 @@ Sigma=Sigma.subs({r*cos(theta):z,
                   r*sin(theta)*cos(phi):x})
 Sigma=Sigma.subs({r**2*sin(theta)**2:x**2+y**2})
 Sigma=Sigma.subs({r**2:x**2+y**2+z**2})
-Sigma=sym.simplify(Sigma)
+Sigma=sym.simplify(Sigma.expand())
 print("Sigma in cartesian coordinates is %s"%Sigma)
 
 Pix=Derivative(Sigma,x)
