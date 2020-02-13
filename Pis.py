@@ -12,9 +12,9 @@
 from sympy import assoc_legendre
 from sympy import cos,sin,Abs,factorial
 from sympy import sqrt
-from sympy.abc import x, m, n
 from sympy import trigsimp
 from sympy import Derivative
+from sympy import lambdify
 
 import sympy as sym
 
@@ -67,3 +67,14 @@ print("Pix is %s"%Pix)
 print("Piy is %s"%Piy)
 print("Piz is %s"%Piz)
 
+fPix=lambdify([x,y,z],Pix)
+fPiy=lambdify([x,y,z],Piy)
+fPiz=lambdify([x,y,z],Piz)
+
+xp=1.0
+yp=0.0
+zp=1.0
+
+print("Pix(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPix(xp,yp,zp)))
+print("Piy(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPiy(xp,yp,zp)))
+print("Piz(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPiz(xp,yp,zp)))
