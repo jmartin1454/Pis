@@ -17,6 +17,7 @@ from sympy import Derivative
 from sympy import lambdify
 
 import sympy as sym
+from sympy import pprint,pretty
 
 costheta=sym.Symbol('costheta')
 z=sym.Symbol('z')
@@ -63,9 +64,9 @@ Piy=sym.simplify(Piy.expand())
 Piz=sym.simplify(Piz.expand())
 
 print(ell-1,m)
-print("Pix is %s"%Pix)
-print("Piy is %s"%Piy)
-print("Piz is %s"%Piz)
+print("Pix is \n%s"%pretty(Pix))
+print("Piy is \n%s"%pretty(Piy))
+print("Piz is \n%s"%pretty(Piz))
 
 fPix=lambdify([x,y,z],Pix)
 fPiy=lambdify([x,y,z],Piy)
@@ -78,3 +79,4 @@ zp=1.0
 print("Pix(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPix(xp,yp,zp)))
 print("Piy(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPiy(xp,yp,zp)))
 print("Piz(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPiz(xp,yp,zp)))
+
