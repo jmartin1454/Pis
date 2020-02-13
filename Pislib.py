@@ -20,6 +20,9 @@ import sympy as sym
 
 class scalarpotential:
     def __init__(self,ell=2,m=0):
+
+        self.ell=ell
+        self.m=m
         
         x=sym.Symbol('x')
         y=sym.Symbol('y')
@@ -41,14 +44,14 @@ class scalarpotential:
         Sigma=sym.simplify(Sigma)
         Sigma=Sigma.subs({Abs(sin(theta)):sin(theta)})
         Sigma=Sigma.expand(trig=True)
-        print("Sigma in spherical coordinates is %s"%Sigma)
+        self.Sigma_spherical=Sigma
         Sigma=Sigma.subs({r*cos(theta):z,
                           r*sin(theta)*sin(phi):y,
                           r*sin(theta)*cos(phi):x})
         Sigma=Sigma.subs({r**2*sin(theta)**2:x**2+y**2})
         Sigma=Sigma.subs({r**2:x**2+y**2+z**2})
         Sigma=sym.simplify(Sigma.expand())
-        print("Sigma in cartesian coordinates is %s"%Sigma)
+        self.Sigma=Sigma
 
         Pix=Derivative(Sigma,x)
         Piy=Derivative(Sigma,y)
@@ -62,19 +65,11 @@ class scalarpotential:
         Piy=sym.simplify(Piy.expand())
         Piz=sym.simplify(Piz.expand())
 
-        print(ell,m)
-        print("Pix is %s"%Pix)
-        print("Piy is %s"%Piy)
-        print("Piz is %s"%Piz)
-
-        fPix=lambdify([x,y,z],Pix)
-        fPiy=lambdify([x,y,z],Piy)
-        fPiz=lambdify([x,y,z],Piz)
-
-        xp=1.0
-        yp=0.0
-        zp=1.0
+        self.Pix=Pix
+        self.Piy=Piy
+        self.Piz=Piz
         
-        print("Pix(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPix(xp,yp,zp)))
-        print("Piy(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPiy(xp,yp,zp)))
-        print("Piz(%2.1f,%2.1f,%2.1f) = %2.1f"%(xp,yp,zp,fPiz(xp,yp,zp)))
+        self.fPix=lambdify([x,y,z],Pix)
+        self.fPiy=lambdify([x,y,z],Piy)
+        self.fPiz=lambdify([x,y,z],Piz)
+
