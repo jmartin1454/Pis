@@ -8,6 +8,7 @@
 
 # Wed Feb 12 15:14:12 CST 2020 Jeff and Mark
 
+# scalarpotential class supplies a variety of useful (self) functions.
 
 from sympy import assoc_legendre
 from sympy import cos,sin,Abs,factorial
